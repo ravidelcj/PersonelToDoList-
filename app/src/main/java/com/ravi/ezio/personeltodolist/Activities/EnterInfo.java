@@ -2,16 +2,20 @@ package com.ravi.ezio.personeltodolist.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.ravi.ezio.personeltodolist.Backend.CustomToDoType;
+import com.ravi.ezio.personeltodolist.Backend.DatabaseHelper;
 import com.ravi.ezio.personeltodolist.Dialog.Datepicker;
 import com.ravi.ezio.personeltodolist.Dialog.Timepicker;
 import com.ravi.ezio.personeltodolist.R;
@@ -20,7 +24,9 @@ import com.ravi.ezio.personeltodolist.R;
 public class EnterInfo extends AppCompatActivity{
 
     private final int PLACE_PICKER=1;
-    public static Button location,datePicker,timePicker;
+    public static Button location,datePicker,timePicker,addToDb;
+    public EditText title,detail;
+    public static int selectDate=0,selectTime=0,selectLocation=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,34 @@ public class EnterInfo extends AppCompatActivity{
                 dialogFragment.show(getSupportFragmentManager(),"datepicker");
             }
         });
+
+        //Adding to database
+        addToDb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(check())
+                {
+                    //Adding to Datbase
+                    DatabaseHelper database=new DatabaseHelper(EnterInfo.this);
+                    CustomToDoType customToDoType=new CustomToDoType();
+                    customToDoType.date=datePicker.getText().toString();
+                    customToDoType.time=timePicker.getText().toString();
+                    customToDoType.detail=detail.getText().toString();
+                    customToDoType.title=title.getText().toString();
+                    customToDoType.location=location.getText().toString();
+                    database.addToDo(customToDoType);
+                }
+                else
+                   Toast.makeText(EnterInfo.this,"Add all Inputs!",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private boolean check() {
+        if(selectLocation==1&&selectTime==1&&selectDate==1&&!title.getText().toString().equals("")&&!detail.getText().toString().equals(""))
+            return true;
+        else return false;
+
     }
 
     @Override
@@ -74,6 +108,7 @@ public class EnterInfo extends AppCompatActivity{
 
             if(resultCode==RESULT_OK)
             {
+                selectLocation=1;
                 Place place=PlacePicker.getPlace(this,data);
                 location.setText(place.getName());
             }
@@ -83,9 +118,15 @@ public class EnterInfo extends AppCompatActivity{
     }
 
     private void init() {
+        selectDate=0;
+        selectLocation=0;
+        selectTime=0;
         location= (Button) findViewById(R.id.selectLocation);
         datePicker= (Button) findViewById(R.id.date);
         timePicker= (Button) findViewById(R.id.time);
+        title= (EditText) findViewById(R.id.title);
+        detail= (EditText) findViewById(R.id.detail);
+        addToDb= (Button) findViewById(R.id.add);
     }
 
 

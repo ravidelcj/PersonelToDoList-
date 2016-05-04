@@ -2,8 +2,12 @@ package com.ravi.ezio.personeltodolist.Backend;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ezio on 4/5/16.
@@ -11,7 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     Context context;
-    public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DatabaseHelper(Context context) {
         super(context, "TODO.db", null, 1);
         this.context=context;
     }
@@ -25,6 +29,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public List<CustomToDoType> getAllToDo()
+    {
+        List<CustomToDoType> list=new ArrayList<CustomToDoType>();
+        String query="SELECT * FROM todolist";
+
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cs=db.rawQuery(query,null);
+        while(cs.moveToNext())
+        {
+            CustomToDoType custom=new CustomToDoType();
+            custom.title=cs.getString(cs.getColumnIndex("title"));
+            custom.detail=cs.getString(cs.getColumnIndex("detail"));
+            custom.time=cs.getString(cs.getColumnIndex("time"));
+            custom.date=cs.getString(cs.getColumnIndex("date"));
+            custom.location=cs.getString(cs.getColumnIndex("location"));
+
+            list.add(custom);
+        }
+        return list;
     }
 
     public void addToDo(CustomToDoType data)

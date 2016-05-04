@@ -3,4 +3,6 @@
     <color name="colorPrimary">#894FBF</color>
     <color name="colorPrimaryDark">#6E29AA</color>
     <color name="colorAccent">#BFC130</color>
+    <color name="cardPurple">#7885CB</color>
+    <color name="cardYellow">#F6BD26</color>
 </resources>

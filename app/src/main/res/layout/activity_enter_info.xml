@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         >
     <EditText
-        android:id="@+id/TextHeader"
+        android:id="@+id/tittle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Tittle"
@@ -27,7 +27,7 @@
         >
     <EditText
         android:hint="Enter Details"
-        android:id="@+id/TextInfo"
+        android:id="@+id/detail"
         android:layout_height="50dp"
         android:layout_width="match_parent"
         />
@@ -64,6 +64,7 @@
         android:layout_height="50dp" />
 
     <Button
+        android:id="@+id/add"
         android:background="@color/colorAccent"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.ravi.ezio.personeltodolist.Dialog;
 
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -39,8 +40,11 @@ public class Timepicker extends DialogFragment implements android.app.TimePicker
 
     }
 
+
+
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         EnterInfo.timePicker.setText(hourOfDay+" : "+minute);
+        EnterInfo.selectTime=1;
     }
 }
