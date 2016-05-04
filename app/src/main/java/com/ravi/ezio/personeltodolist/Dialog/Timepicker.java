@@ -9,9 +9,7 @@ import android.support.v4.app.Fragment;
 
 import android.widget.TimePicker;
 
-import com.ravi.ezio.personeltodolist.R;
-import com.wdullaer.materialdatetimepicker.time.TimePickerController;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import com.ravi.ezio.personeltodolist.Activities.EnterInfo;
 
 import android.text.format.DateFormat;
 import java.util.Calendar;
@@ -19,10 +17,10 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class timePicker extends DialogFragment implements android.app.TimePickerDialog.OnTimeSetListener{
+public class Timepicker extends DialogFragment implements android.app.TimePickerDialog.OnTimeSetListener{
 
 
-    public timePicker() {
+    public Timepicker() {
         // Required empty public constructor
     }
 
@@ -43,6 +41,6 @@ public class timePicker extends DialogFragment implements android.app.TimePicker
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+        EnterInfo.timePicker.setText(hourOfDay+" : "+minute);
     }
 }

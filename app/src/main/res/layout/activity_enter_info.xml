@@ -8,23 +8,30 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.ravi.ezio.personeltodolist.enterInfo"
+    tools:context=".Activities.EnterInfo"
     android:weightSum="1">
 
-
+    <android.support.design.widget.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
     <EditText
         android:id="@+id/TextHeader"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Tittle"
         />
+    </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        >
     <EditText
         android:hint="Enter Details"
         android:id="@+id/TextInfo"
         android:layout_height="50dp"
         android:layout_width="match_parent"
         />
+    </android.support.design.widget.TextInputLayout>
     <LinearLayout
         android:weightSum="1"
         android:orientation="horizontal"
@@ -51,8 +58,17 @@
         android:gravity="center|left"
         />
     <Button
+        android:id="@+id/selectLocation"
         android:text="current Location"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
+
+    <Button
+        android:background="@color/colorAccent"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        />
 
 </LinearLayout>
