@@ -2,7 +2,6 @@ package com.ravi.ezio.personeltodolist.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,7 +24,7 @@ public class EnterInfo extends AppCompatActivity{
 
     private final int PLACE_PICKER=1;
     public static Button location,datePicker,timePicker,addToDb;
-    public EditText title,detail;
+    public EditText titleedit,detail;
     public static int selectDate=0,selectTime=0,selectLocation=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +75,7 @@ public class EnterInfo extends AppCompatActivity{
         addToDb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(check())
                 {
                     //Adding to Datbase
@@ -84,9 +84,10 @@ public class EnterInfo extends AppCompatActivity{
                     customToDoType.date=datePicker.getText().toString();
                     customToDoType.time=timePicker.getText().toString();
                     customToDoType.detail=detail.getText().toString();
-                    customToDoType.title=title.getText().toString();
+                    customToDoType.title=titleedit.getText().toString();
                     customToDoType.location=location.getText().toString();
                     database.addToDo(customToDoType);
+                    startActivity(new Intent(EnterInfo.this,MainActivity.class));
                 }
                 else
                    Toast.makeText(EnterInfo.this,"Add all Inputs!",Toast.LENGTH_SHORT).show();
@@ -95,7 +96,7 @@ public class EnterInfo extends AppCompatActivity{
     }
 
     private boolean check() {
-        if(selectLocation==1&&selectTime==1&&selectDate==1&&!title.getText().toString().equals("")&&!detail.getText().toString().equals(""))
+        if(selectLocation==1&&selectTime==1&&selectDate==1&&!titleedit.getText().toString().equals("")&&!detail.getText().toString().equals(""))
             return true;
         else return false;
 
@@ -124,7 +125,7 @@ public class EnterInfo extends AppCompatActivity{
         location= (Button) findViewById(R.id.selectLocation);
         datePicker= (Button) findViewById(R.id.date);
         timePicker= (Button) findViewById(R.id.time);
-        title= (EditText) findViewById(R.id.title);
+        titleedit= (EditText) findViewById(R.id.tittle);
         detail= (EditText) findViewById(R.id.detail);
         addToDb= (Button) findViewById(R.id.add);
     }

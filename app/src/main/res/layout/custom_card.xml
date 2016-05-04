@@ -3,18 +3,19 @@
     android:layout_height="100dp"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+
     android:layout_marginTop="3dp"
-    android:background="@color/cardPurple"
-    app:cardCornerRadius="5dp"
+
+
 
     >
     <LinearLayout
+        android:background="@color/cardPurple"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1"
         android:orientation="vertical"
+        android:id="@+id/card"
         >
         <LinearLayout
             android:weightSum="1"
@@ -24,18 +25,20 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_marginLeft="10dp"
+                android:id="@+id/card_time"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
                 android:text="Time"
                 android:textColor="@color/cardYellow"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.5"
                 />
             <TextView
+                android:id="@+id/card_date"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:text="Date"
@@ -51,11 +54,13 @@
         </LinearLayout>
 
         <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/card_title"
             android:layout_weight="0.4"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:text="Tittle"
-            android:gravity="center"
+            android:gravity="center|left"
             android:textSize="35dp"
             android:typeface="monospace" />
 
