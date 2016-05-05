@@ -21,14 +21,15 @@ public class Start extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         rowno=getIntent().getIntExtra("ROWNO",-1);
-
+        setNotificationService();
     }
     private void setNotificationService() {
 
-        long miliTime=1800000;  //30 minutes prior
+       // long miliTime=1800000;  //30 minutes prior
+        long miliTime = 5000;
         Intent intent=new Intent(this, AlertReceiver.class);
         intent.putExtra("ROWNO",rowno);
         AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,miliTime, PendingIntent.getBroadcast(this,1,intent,PendingIntent.FLAG_UPDATE_CURRENT));
+        alarmManager.set(AlarmManager.RTC_WAKEUP,miliTime, PendingIntent.getBroadcast(this,2,intent,PendingIntent.FLAG_UPDATE_CURRENT));
     }
 }

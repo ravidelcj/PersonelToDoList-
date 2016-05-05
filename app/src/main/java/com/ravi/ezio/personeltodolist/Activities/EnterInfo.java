@@ -112,9 +112,10 @@ public class EnterInfo extends AppCompatActivity{
 
         cal.set(year,month,date,hour,minute);
      //   long miliTime=cal.getTimeInMillis()-900000;  //15 minutes prior
-        long miliTime=1000;
+        long miliTime=5000;
         Intent intent=new Intent(this, AlertReceiver.class);
         intent.putExtra("ROWNO",rowno);
+        intent.putExtra("TITLE",customToDoType.title);
         AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,miliTime, PendingIntent.getBroadcast(this,1,intent,PendingIntent.FLAG_UPDATE_CURRENT));
     }

@@ -3,7 +3,9 @@ package com.ravi.ezio.personeltodolist.Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +33,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        if(!prefs.getBoolean("first",false))
+        {
+            SharedPreferences.Editor editor=prefs.edit();
+            editor.putBoolean("first",true);
+            editor.commit();
+            Intent intent=new Intent(this,Splash.class);
+            startActivity(intent);
+            finish();
+        }
+
+            setContentView(R.layout.activity_main);
+
         init();
 
         //searching for data in database

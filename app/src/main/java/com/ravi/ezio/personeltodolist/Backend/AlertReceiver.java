@@ -17,7 +17,9 @@ public class AlertReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+
         int rowno=intent.getIntExtra("ROW",-1);
+        String title=intent.getStringExtra("TITLE");
         NotificationCompat.Builder mBuilder;
         Intent stop=new Intent(context,Stop.class);
         stop.putExtra("ROWNO",rowno);
@@ -26,9 +28,10 @@ public class AlertReceiver extends BroadcastReceiver {
 
         Intent snooze=new Intent(context,Start.class);
         snooze.putExtra("ROWNO",rowno);
+        snooze.putExtra("TITLE",title);
         PendingIntent snoozeIntent=PendingIntent.getActivity(context,0,snooze,0);
 
-        mBuilder=new NotificationCompat.Builder(context).setContentTitle("MSG").setTicker("Reminder").addAction(android.R.drawable.alert_dark_frame,"STOP",stopIntent).addAction(android.R.drawable.ic_lock_idle_alarm,"SNOOZE",snoozeIntent);
+        mBuilder=new NotificationCompat.Builder(context).setContentTitle(title).setTicker("Reminder").addAction(android.R.drawable.alert_dark_frame,"STOP",stopIntent).addAction(android.R.drawable.ic_lock_idle_alarm,"SNOOZE",snoozeIntent);
         mBuilder.setSmallIcon(android.R.drawable.ic_dialog_alert);
         NotificationManager manager= (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         manager.notify(1,mBuilder.build());
