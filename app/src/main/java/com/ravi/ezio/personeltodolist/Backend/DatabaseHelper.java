@@ -52,7 +52,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public void addToDo(CustomToDoType data)
+    public boolean deleteARecord(long row)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.delete("todolist","_id = "+row,null)>0;
+    }
+    public long addToDo(CustomToDoType data)
     {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
@@ -61,6 +66,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("location",data.location);
         contentValues.put("date",data.date);
         contentValues.put("time",data.time);
-        db.insert("todolist",null,contentValues);
+        return db.insert("todolist",null,contentValues);
     }
 }

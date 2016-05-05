@@ -28,8 +28,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.EnterInfo" />
-
-        <activity android:name=".Activities.Show"></activity>
+        <activity android:name=".Activities.Show" />
+        <activity android:name=".Activities.Start" />
+        <activity android:name=".Activities.Stop"></activity>
+        <receiver android:process=":remote" android:name=".Backend.AlertReceiver"></receiver>
     </application>
+
+
 
 </manifest>

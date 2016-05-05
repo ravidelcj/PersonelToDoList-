@@ -46,5 +46,7 @@ public class Timepicker extends DialogFragment implements android.app.TimePicker
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         EnterInfo.timePicker.setText(hourOfDay+" : "+minute);
         EnterInfo.selectTime=1;
+        EnterInfo.hour=hourOfDay;
+        EnterInfo.minute=minute;
     }
 }

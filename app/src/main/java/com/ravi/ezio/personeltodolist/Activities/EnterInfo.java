@@ -1,5 +1,7 @@
 package com.ravi.ezio.personeltodolist.Activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,15 +15,23 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.ravi.ezio.personeltodolist.Backend.AlertReceiver;
 import com.ravi.ezio.personeltodolist.Backend.CustomToDoType;
 import com.ravi.ezio.personeltodolist.Backend.DatabaseHelper;
 import com.ravi.ezio.personeltodolist.Dialog.Datepicker;
 import com.ravi.ezio.personeltodolist.Dialog.Timepicker;
 import com.ravi.ezio.personeltodolist.R;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 
 public class EnterInfo extends AppCompatActivity{
 
+    public static int date,month,year;
+    public static int minute,hour;
+    CustomToDoType customToDoType;
+    long rowno;
     private final int PLACE_PICKER=1;
     public static Button location,datePicker,timePicker,addToDb;
     public EditText titleedit,detail;
@@ -80,19 +90,33 @@ public class EnterInfo extends AppCompatActivity{
                 {
                     //Adding to Datbase
                     DatabaseHelper database=new DatabaseHelper(EnterInfo.this);
-                    CustomToDoType customToDoType=new CustomToDoType();
+                    customToDoType=new CustomToDoType();
                     customToDoType.date=datePicker.getText().toString();
                     customToDoType.time=timePicker.getText().toString();
                     customToDoType.detail=detail.getText().toString();
                     customToDoType.title=titleedit.getText().toString();
                     customToDoType.location=location.getText().toString();
-                    database.addToDo(customToDoType);
+                    rowno=database.addToDo(customToDoType);
+                    setNotificationService();
                     startActivity(new Intent(EnterInfo.this,MainActivity.class));
                 }
                 else
                    Toast.makeText(EnterInfo.this,"Add all Inputs!",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setNotificationService() {
+        Calendar cal=Calendar.getInstance();
+        String mydate=customToDoType.date;
+
+        cal.set(year,month,date,hour,minute);
+     //   long miliTime=cal.getTimeInMillis()-900000;  //15 minutes prior
+        long miliTime=1000;
+        Intent intent=new Intent(this, AlertReceiver.class);
+        intent.putExtra("ROWNO",rowno);
+        AlarmManager alarmManager= (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,miliTime, PendingIntent.getBroadcast(this,1,intent,PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
     private boolean check() {
