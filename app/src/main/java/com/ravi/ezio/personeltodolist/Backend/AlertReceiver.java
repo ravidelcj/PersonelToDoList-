@@ -36,6 +36,6 @@ public class AlertReceiver extends BroadcastReceiver {
         mBuilder.setSmallIcon(android.R.drawable.ic_dialog_alert);
         NotificationManager manager= (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         manager.notify(1,mBuilder.build());
-        Toast.makeText(context,"Toast set",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context,"Toast set",Toast.LENGTH_SHORT).show();
     }
 }

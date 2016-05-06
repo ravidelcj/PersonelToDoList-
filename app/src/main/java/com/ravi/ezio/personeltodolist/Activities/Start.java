@@ -2,6 +2,7 @@ package com.ravi.ezio.personeltodolist.Activities;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,6 +24,8 @@ public class Start extends BroadcastReceiver {
          long miliTime=1800000;  //30 minutes prior
         //long miliTime = 30000;
       //  Toast.makeText(context,"jgjgcxjgxj",Toast.LENGTH_LONG).show();
+        NotificationManager notificationManager= (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(1);
         Intent intent1=new Intent(context, AlertReceiver.class);
         intent1.putExtra("ROWNO",intent.getIntExtra("ROWNO",-1));
         intent1.putExtra("TITLE",intent.getStringExtra("TITLE"));
