@@ -54,6 +54,7 @@ public class MyRecyclerView extends RecyclerView.Adapter<MyRecyclerView.MyViewHo
                 context.startActivity(intent);
             }
         });
+
     }
 
     @Override

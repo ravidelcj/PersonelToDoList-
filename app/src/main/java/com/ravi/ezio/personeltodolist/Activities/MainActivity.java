@@ -24,6 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static MainActivity mainActivity;
     TextView emptyDatabaseNotice;
     RecyclerView recyclerView;
     MyRecyclerView recyclerAdapter;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity=this;
         SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
         if(!prefs.getBoolean("first",false))
         {
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,EnterInfo.class));
+                finish();
             }
         });
 
